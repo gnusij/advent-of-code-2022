@@ -1,15 +1,20 @@
 from pathlib import Path
 
-WIN = {
-    'r':'p',
-    'p':'s',
-    's':'r',
-}
-LOSE = {
-    'r':'s',
-    'p':'r',
-    's':'p',
-}
+# WIN = {
+#     'r':'p',
+#     'p':'s',
+#     's':'r',
+# }
+# LOSE = {
+#     'r':'s',
+#     'p':'r',
+#     's':'p',
+# }
+# SHAPE = {
+#     'r':1,
+#     'p':2,
+#     's':3,
+# }
 O = {
     'A':'r',
     'B':'p',
@@ -20,15 +25,8 @@ M = {
     'Y':'p',
     'Z':'s',
 }
-SHAPE = {
-    'r':1,
-    'p':2,
-    's':3,
-}
 
-S = " rps"
-SEQ = "rps"
-COND = "rrppssrpsr"
+S = "rps"
 
 def solution_a(data):
     #def play(o, m):
@@ -39,7 +37,7 @@ def solution_a(data):
     #    elif LOSE[o] == m:
     #        return 0 + SHAPE[m]
     #print(sum([play(O[o], M[m]) for o, m in data]))
-    print(sum(["rrppssrpsr".count(O[o]+M[m])*3+S.find(M[m]) for o, m in data]))
+    print(sum(["rrppssrpsr".count(O[o]+M[m])*3+(" "+S).find(M[m]) for o, m in data]))
 
 def solution_b(data):
     #def play(o, m):
@@ -50,7 +48,7 @@ def solution_b(data):
     #    else: 
     #        return 6 + SHAPE[WIN[o]]
     #print(sum([play(O[o], m) for o, m in data]))
-    print(sum(["XYZ".find(m)*3+S.find(SEQ[(SEQ.find(O[o])+"XYZ".find(m)-1)%3])  for o, m in data]))
+    print(sum(["XYZ".find(m)*3+(" "+S).find(S[(S.find(O[o])+"XYZ".find(m)-1)%3]) for o, m in data]))
     
 
 def main():
