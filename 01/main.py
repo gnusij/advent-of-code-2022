@@ -4,7 +4,7 @@ def solution_a(data):
     print(max(data))
 
 def solution_b(data):
-    print(sum(sorted(data, reverse=True)[:3]))
+    print(sum(sorted(data)[::-1][:3]))
 
 def main():
     with open(Path(__file__).parent.joinpath('data.txt')) as f:
