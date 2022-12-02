@@ -1,31 +1,14 @@
 from pathlib import Path
-import numpy as np
 
 def solution_a(data):
-    sums = []
-    l = []
-    for line in data:
-        if line == "":
-            sums.append(sum(l))
-            l = []
-        else:
-            l.append(int(line))
-    print(max(sums))
+    print(max(data))
 
 def solution_b(data):
-    sums = []
-    l = []
-    for line in data:
-        if line == "":
-            sums.append(sum(l))
-            l = []
-        else:
-            l.append(int(line))
-    print(sum(sorted(sums, reverse=True)[:3]))
+    print(sum(sorted(data, reverse=True)[:3]))
 
 def main():
-    with open(Path(Path(__file__).parent, 'data.txt')) as f:
-        data = [line.strip() for line in f.readlines()]
+    with open(Path(__file__).parent.joinpath('data.txt')) as f:
+        data = list(map(lambda x: sum(map(int, x.split('\n'))), f.read().split('\n\n'))) 
     solution_a(data)
     solution_b(data)
 
