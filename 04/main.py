@@ -8,7 +8,6 @@ def solution_a(data):
         return A.issubset(B) or B.issubset(A)
     print(sum([1 if d(*s) else 0 for s in data]))
 
-
 def solution_b(data):
     print(sum([1 if set.intersection(*s) else 0 for s in data]))
 
