@@ -1,12 +1,6 @@
 
-def O(c):
-    return ord(c)-65
-
-def M(c):
-    return ord(c)-88
-
 def C(o,m):
-    return O(o), M(m)
+    return ord(o)-65, ord(m)-88
 
 def solution_a(data):
     print(sum(["0011220120".count(str(o)+str(m))*3+m+1 for o,m in data]))
