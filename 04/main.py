@@ -1,24 +1,23 @@
 
 def T(d):
-    def e(l):
+    def E(l):
         x = [*map(int,l.split('-'))]
         return {*range(x[0],x[1]+1)}
-    return [[*map(e, l.split(','))] for l in d.splitlines()]
+    return [[*map(E, l.split(','))] for l in d.splitlines()]
 
-def solution_a(data):
-    def d(A,B):
+def q1(d):
+    def S(A,B):
         return A.issubset(B) or B.issubset(A)
-    print(sum([1 if d(*s) else 0 for s in T(data)]))
+    print(sum([1 if S(*s) else 0 for s in d]))
 
-def solution_b(data):
-    print(sum([1 if set.intersection(*s) else 0 for s in T(data)]))
+def q2(d):
+    print(sum([1 if set.intersection(*s) else 0 for s in d]))
 
 def main():
-    from aoc import data
-    solution_a(data)
-    solution_b(data)
+    import aoc 
+    d = T(aoc.get(2022,4))
+    q1(d)
+    q2(d)
 
 if __name__ == "__main__":
     main()
-
-
