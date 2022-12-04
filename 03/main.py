@@ -1,20 +1,20 @@
 
-def c(*s):
-    def calc(c):
-        return ord(c)-96 if c.islower() else ord(c)-38
-    return sum([calc(c) for c in set.intersection(*s)])
+def s(l):
+    return set(list(l))
 
+def c(*s):
+    def p(c):
+        return ord(c)-96 if c.islower() else ord(c)-38
+    return sum([p(c) for c in set.intersection(*s)])
 
 def solution_a(data):
-    def s(l):
+    def h(l):
         h = len(l)//2
         return [l[:h], l[h:]]
-    print(sum([c(*map(lambda x: set(list(x)), s(l))) for l in data]))
-
+    print(sum([c(*map(s, h(l))) for l in data]))
 
 def solution_b(data):
-    print(sum([c(*map(lambda x: set(list(x)), l)) for l in zip(*[iter(data)]*3)]))
-
+    print(sum([c(*map(s, l)) for l in zip(*[iter(data)]*3)]))
 
 def main():
     import aoc 
