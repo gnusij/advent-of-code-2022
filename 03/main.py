@@ -1,37 +1,24 @@
 
-def calc_p(char):
-    if char.islower():
-        return ord(char) - 96
-    else:
-        return ord(char) - 38
+def c(*s):
+    def calc(c):
+        return ord(c)-96 if c.islower() else ord(c)-38
+    return sum([calc(c) for c in set.intersection(*s)])
 
 
 def solution_a(data):
-    s = 0
-    for l in data:
-        A = set(list(l[:int(len(l)/2)]))
-        B = set(list(l[int(len(l)/2):]))
-        intersect = A.intersection(B)
-        for char in intersect:
-            s += calc_p(char)  
-    print(s)
+    def s(l):
+        h = len(l)//2
+        return [l[:h], l[h:]]
+    print(sum([c(*map(lambda x: set(list(x)), s(l))) for l in data]))
 
 
 def solution_b(data):
-    s = 0
-    for i in range(0,len(data)-1,3):
-        A = set(list(data[i]))
-        B = set(list(data[i+1]))
-        C = set(list(data[i+2]))
-        intersect = A.intersection(B, C)
-        for char in intersect:
-            s += calc_p(char)  
-    print(s)
+    print(sum([c(*map(lambda x: set(list(x)), l)) for l in zip(*[iter(data)]*3)]))
 
 
 def main():
-    from aoc import data
-    data = data.split('\n')
+    import aoc 
+    data = aoc.get(2022,3).splitlines()
     solution_a(data)
     solution_b(data)
 
