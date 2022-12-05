@@ -1,3 +1,7 @@
+"""
+TODO: prolly cleaner to have boxes in reverse order
+"""
+    
 import re
 
 def T(d):
@@ -5,7 +9,7 @@ def T(d):
     crt = [[s[x] for x in range(1,len(s),4)] for s in d.split('\n\n')[0].splitlines()[:-1]]
     return ins, crt 
 
-def P(C):
+def print_crates(C):
     " for debugging "
     print()
     [print(c) for c in C]
@@ -21,7 +25,7 @@ def find_top_ind(c, n):
             return i
     return len(c)
 
-def top_crate_letters(c):
+def print_top_crate_letters(c):
     print(''.join([find_top(c,i) for i in range(len(c[0]))]))
 
 def move_one(c, f, t):
@@ -54,13 +58,13 @@ def q1(d):
     for i in I:
         for j in range(i[0]):
             C = move_one(C, i[1]-1, i[2]-1)
-    top_crate_letters(C)
+    print_top_crate_letters(C)
 
 def q2(d):
     I, C = T(d)
     for i in I:
         C = move_n(C, i[0], i[1]-1, i[2]-1)
-    top_crate_letters(C)
+    print_top_crate_letters(C)
 
 def main():
     import aoc 
