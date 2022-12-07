@@ -1,15 +1,8 @@
-
-def f(d, n): 
-    for i in range(len(d)):
-        if len({*d[i:i+n]})==n:
-            print(i+n)
-            break
-
-def main():
-    import aoc 
-    d = aoc.get(2022,6).strip()
-    f(d, 4)
-    f(d, 14)
-
-if __name__ == "__main__":
-    main()
+def f(d,n): 
+    i=0
+    while not len({*d[i:i+n]})==n: i+=1
+    print(i+n)
+import aoc 
+d=aoc.get(2022,6).strip()
+f(d,4)
+f(d,14)
