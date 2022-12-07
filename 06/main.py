@@ -1,8 +1,7 @@
 
 def f(d, n): 
     for i in range(len(d)):
-        l=[*d[i:i+n]]
-        if len({*l})==n:
+        if len({*d[i:i+n]})==n:
             print(i+n)
             break
 
