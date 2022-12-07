@@ -1,71 +1,26 @@
-class Dir:
-    def __init__(self, p, n):
-        self.p = p
-        self.n = n
-        self.s = 0
-
-class File:
-    def __init__(self, p, s, n):
-        self.p = p
-        self.s = s
-        self.n = n
-
-global DIRS
-global FILES
-DIRS = {}
-FILES = {}
-
-def get(d, cwd):
-    global DIRS
-    global FILES 
-
-    for cmd in d:
-        if cmd.startswith('$'):
-            break
-        elif cmd.startswith('dir'):
-            n = cmd.split()[1]
-            if cwd not in DIRS:
-                DIRS[cwd] = Dir(cwd, n)
-        else:
-            s = int(cmd.split()[0])
-            n = cmd.split()[1]
-            FILES[cwd+n] = File(cwd, s, n)
-
-def q1(d):
-    cwd = '/'
-    for i in range(1, len(d)):
-        if d[i].startswith('$ cd ..'):
-            cwd = '/'.join(cwd.split('/')[:-2]) + '/'
-        elif d[i].startswith('$ cd'):
-            n = d[i].split()[2]
-            cwd += n +'/'
-        elif d[i].startswith('$ ls'):
-            get(d[i+1:], cwd)
-        if cwd not in DIRS:
-            DIRS[cwd] = Dir(cwd, n)
-
-    for f in FILES:
-        d = FILES[f].p
-        while True:
-            DIRS[d].s += FILES[f].s
-            if d == '/':
-                break
-            d = '/'.join(d.split('/')[:-2]) + '/'
-    s=0
-    for d in DIRS:
-        if DIRS[d].s <= 100000:
-            s+=DIRS[d].s
-    print(s)
-
-
-def q2(d):
-    x = 30000000 - 70000000 + DIRS['/'].s
-    print(min([DIRS[d].s for d in DIRS if DIRS[d].s >= x]))
-
-
 import aoc 
-d=aoc.get(2022,7).strip()
-d = d.splitlines()
-q1(d)
-q2(d)
 
+d=[d.split() for d in aoc.get(2022,7).strip().split("$ ")[1:]][1:]
+o=p='/';F={};D={}
+f=lambda p,n: o.join(p.split(o)[:-n])+o
+for c in d:
+    if c[0]=='cd' and c[1]=='..':
+        p = f(p,2)
+    elif c[0]=='cd':
+        p += c[1]+o
+    elif c[0]=='ls':
+        i=1
+        while i<len(c):
+            if c[i] != 'dir':
+                F[p+c[i+1]] = int(c[i])
+            i+=2
+    if p not in D: D[p]=0
+
+for p in F:
+    d = f(p,1)
+    while d:
+        D[d] += F[p]
+        if d==o: break
+        d = f(d,2)
+print(sum([D[d] for d in D if D[d]<=100000]))
+print(min([D[p] for p in D if D[p]>=30000000-70000000+D[o]]))
