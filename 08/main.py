@@ -12,4 +12,3 @@ for y in r(1,h-1):
   s+=[math.prod(S(x,y))]
 print((h+w)*2-4+v)
 print(max(s))
-
