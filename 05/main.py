@@ -1,30 +1,12 @@
-import re
-
-def T(d):
-    I = [[*map(int, re.findall(r'\d+',s))] for s in d[1].splitlines()]
-    B = [[s[x] for x in range(1,len(s),4)] for s in d[0].splitlines()]
-    B = [[x for x in b if x != ' '] for b in [*map(list, zip(*B[:-1][::-1]))]]
-    return I, B
-
-def p(B):
-    print(''.join([b[-1] for b in B]))
-
-def q1(I, B):
-    for n, c1, c2 in I:
-        [B[c2-1].append(B[c1-1].pop()) for i in range(n)]
-    p(B)
-
-def q2(I, B):
-    for n, c1, c2 in I:
-        B[c2-1].extend([B[c1-1].pop() for i in range(n)][::-1])
-    p(B)
-
-def main():
-    import aoc 
-    d = aoc.get(2022,5).split('\n\n')
-    q1(*T(d))
-    q2(*T(d))
-
-if __name__ == "__main__":
-    main()
-
+import aoc;d=aoc.get(2022,5) 
+T=lambda b:[[x for x in b if x!=' '] for b in [*zip(*[[*x[1::4]] for x in b.splitlines()][:-1][::-1])]]
+L=lambda B:''.join([b[-1] for b in B])
+b,i=d.split('\n\n')
+B,M=T(b),T(b)
+for n,x,y in zip(*[iter(map(int,i.split()[1::2]))]*3):
+ l=[]
+ for i in range(n):
+  B[y-1]+=B[x-1].pop()
+  l+=M[x-1].pop()
+ M[y-1].extend(l[::-1])
+print(L(B),L(M))
