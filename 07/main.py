@@ -1,5 +1,5 @@
-import aoc 
-d=[d.split() for d in aoc.get(2022,7).split("$ ")[1:]][1:]
+import aoc;d=aoc.get(2022,7) 
+d=[d.split() for d in d.split("$ ")[1:]][1:]
 o=p='/';F,D={},{};V='..'
 f=lambda p,v=V:p[:p[:-1].rfind(o)+1] if v==V else p+v+o
 for c in d:
