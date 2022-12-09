@@ -67,7 +67,7 @@ class Grid:
                 self.history.add(self.chains[-1])
             self.c+=1
             #print()
-            self.show_chains()
+            #self.show_chains()
 
     def follow(self, ind):
         x1=self.chains[ind-1][0]
@@ -115,8 +115,7 @@ def printG(G):
 #"""
 
 G=Grid(10)
-G.show()
 for inst in d.splitlines():
     G.do(inst)
-#G.show_visited()
-#print(len(G.history))
+G.show_visited()
+print(len(G.history))
