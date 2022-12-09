@@ -1,7 +1,10 @@
+import aoc;d=aoc.get(2022,4)
 def E(l):
- x,y = [*map(int,l.split('-'))]
- return {*range(x,y+1)}
-import aoc 
-d=[[*map(E, l.split(','))] for l in aoc.get(2022,4).splitlines()]
-print(sum([1 if a.issubset(b) or b.issubset(a) else 0 for a,b in d]))
-print(sum([1 if set.intersection(*s) else 0 for s in d]))
+ x,y=map(int,l.split('-'))
+ return{*range(x,y+1)}
+s=t=0
+for l in d.split():
+ a,b=map(E,l.split(','))
+ if a.issubset(b)|b.issubset(a):s+=1
+ if set.intersection(a,b):t+=1
+print(s,t)
