@@ -1,4 +1,3 @@
-
 class Program:
     def __init__(self):
         self.X = 1
@@ -6,7 +5,7 @@ class Program:
         self.signal_strength = 0
         self.queue = []
         self.proc = None
-        self.CRT = [['.' for i in range(40)] for j in range(6)]
+        self.CRT = [[' ' for i in range(40)] for j in range(6)]
 
     def show(self):
         [print(''.join(c)) for c in self.CRT]
@@ -20,7 +19,7 @@ class Program:
 
     def do(self, d):
         self.read(d)
-        print(self.queue)
+        #print(self.queue)
         while True:
             # Beggining cycle
             if not self.proc:
@@ -32,7 +31,7 @@ class Program:
                 inst,c = self.proc
                 # signal_strength
                 if (self.cycle-20)%40 == 0:
-                    print(f"At cycle {self.cycle} X is {self.X} score {self.cycle * self.X}")
+                    #print(f"At cycle {self.cycle} X is {self.X} score {self.cycle * self.X}")
                     self.signal_strength += self.cycle * self.X
 
                 # draw
