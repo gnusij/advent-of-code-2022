@@ -1,16 +1,17 @@
-from queue import PriorityQueue
+from heapq import *
+H,P=heappush,heappop
 def dijkstra(G,s,t):
     D={v:len(G) for v in range(len(G))}
     D[s]=0
-    q=PriorityQueue()
-    q.put((0,s))
-    while not q.empty():
-        (d,v)=q.get()
+    q=[]
+    H(q,(0,s))
+    while q:
+        (d,v)=P(q)
         for n in G[v]:
             a=D[n]
             b=D[v]+1 
             if b<a:
-                q.put((b,n))
+                H(q,(b,n))
                 D[n]=b 
     return D[t]
 
