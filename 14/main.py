@@ -15,52 +15,34 @@ for line in open(0).read().splitlines():
             maxx = max(x,X)
             for i in range(minx,maxx+1):
                 G.add((i,y))
-
         YY = max(Y,y,YY)
 
+def sand(G):
+    G = eval(str(G))
+    s = 0
+    i = 0
+    while i<100000 and (500,0) not in G: 
+        x,y = 500, 0
+        while y<1000: 
+            if (x,y+1) not in G:
+                y+=1
+            elif (x-1,y+1) not in G:
+                x-=1
+                y+=1
+            elif (x+1,y+1) not in G:
+                x+=1
+                y+=1
+            else:
+                G.add((x,y)) 
+                s+=1
+                break
+        i+=1
+    print(s)
 
-s = 0
-i = 0
-c = 0
-#while True: 
-#    x,y = 500, 0
-#    if c>100000: break
-#    while True: 
-#        c +=1
-#        if y>1000:break
-#        if (x,y+1) not in G:
-#            y+=1
-#        elif (x-1,y+1) not in G:
-#            x-=1
-#            y+=1
-#        elif (x+1,y+1) not in G:
-#            x+=1
-#            y+=1
-#        else:
-#            G.add((x,y)) 
-#            s+=1
-#            break
-#    i+=1
-#print(s)
-
+sand(G)
 for i in range(-10000,10000):
     G.add((i,YY+2))
+sand(G)
 
-while (500,0) not in G: 
-    x,y = 500, 0
-    while True: 
-        c +=1
-        if (x,y+1) not in G:
-            y+=1
-        elif (x-1,y+1) not in G:
-            x-=1
-            y+=1
-        elif (x+1,y+1) not in G:
-            x+=1
-            y+=1
-        else:
-            G.add((x,y)) 
-            s+=1
-            break
-    i+=1
-print(s)
+
+# TODO: need to find a way to not use arbitary depth to break the whileloop
