@@ -1,5 +1,5 @@
 S = set(); B = set()
-minx = 0;maxx = 0
+minx = 0;maxx = 0;maxd = 0
 for line in open(0).read().splitlines():
     tmp = line.split(',')
     sx = int(tmp[0].split('=')[1].strip())
@@ -11,6 +11,7 @@ for line in open(0).read().splitlines():
     B.add((bx, by))
     minx = min(minx, sx, bx)
     maxx = max(maxx, sx, bx)
+    maxd = max(maxd, dist)
 
 def check(S,x,y):
     for sx,sy,dist in S:
@@ -20,18 +21,19 @@ def check(S,x,y):
     return 1
 
 def edges(sx,sy,dist):
-    for dx in range(dist+1+1):
-        dy = dist+1-dx
-        for X,Y in [(1,1),(1,-1),(-1,1),(-1,-1)]:
-            x = X*dx + sx
-            y = Y*dy + sy
+    x = sx
+    y = sy+dist+1
+    for X,Y in [(-1,-1),(1,-1),(1,1),(-1,1)]:
+        while abs(sx-x-X)+abs(sy-y-Y) == dist+1:
             yield x,y
+            x+=X
+            y+=Y
 
-minx-=1000000
-maxx+=1000000
+minx-=maxd
+maxx+=maxd
 s = 0
 y = 2000000
-for x in range(minx, maxx):
+for x in range(minx, maxx+1):
     if (x,y) not in B and not check(S,x,y):
         s +=1
 print(s)
