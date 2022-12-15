@@ -1,5 +1,5 @@
 S = set(); B = set()
-minx = 0;miny = 0;maxx = 0;maxy = 0
+minx = 0;maxx = 0
 for line in open(0).read().splitlines():
     tmp = line.split(',')
     sx = int(tmp[0].split('=')[1].strip())
@@ -11,8 +11,6 @@ for line in open(0).read().splitlines():
     B.add((bx, by))
     minx = min(minx, sx, bx)
     maxx = max(maxx, sx, bx)
-    miny = min(miny, sy, by)
-    maxy = max(maxy, sy, by)
 
 def check(S,x,y):
     for sx,sy,dist in S:
@@ -29,8 +27,6 @@ def edges(sx,sy,dist):
             y = Y*dy + sy
             yield x,y
 
-miny-=1000000
-maxy+=1000000
 minx-=1000000
 maxx+=1000000
 s = 0
