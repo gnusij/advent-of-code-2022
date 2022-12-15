@@ -40,7 +40,6 @@ for x in range(minx, maxx):
     if (x,y) not in B and not check(S,x,y):
         s +=1
 print(s)
-# why my part1 so slow??
 
 m = 4000000
 for sx,sy,dist in S:
