@@ -29,7 +29,6 @@ def edges(sx,sy,dist):
             y = Y*dy + sy
             yield x,y
 
-# PART 1
 miny-=1000000
 maxy+=1000000
 minx-=1000000
