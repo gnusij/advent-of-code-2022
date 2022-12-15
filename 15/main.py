@@ -21,7 +21,7 @@ def check(S,x,y):
             return 0
     return 1
 
-def edges(x,y,dist):
+def edges(sx,sy,dist):
     for dx in range(dist+1+1):
         dy = dist+1-dx
         for X,Y in [(1,1),(1,-1),(-1,1),(-1,-1)]:
@@ -40,12 +40,13 @@ for x in range(minx, maxx):
     if (x,y) not in B and not check(S,x,y):
         s +=1
 print(s)
+# why my part1 so slow??
 
 m = 4000000
 for sx,sy,dist in S:
     for x,y in edges(sx,sy,dist):
         if 0<x<m and 0<y<m and check(S,x,y):
-            print(x*4000000 + y)
+            print(x*m + y)
             break
     else:
         continue
